@@ -1,17 +1,18 @@
 <li
   [ngClass]="{
     'list-group-item': true,
-    'list-group-item-success': postLoveIts > 0,
-    'list-group-item-danger': postLoveIts < 0
+    'list-group-item-success': post.loveIts > 0,
+    'list-group-item-danger': post.loveIts < 0
   }"
 >
   <div class="post">
-    <h4>{{ postTitle }}</h4>
-    <p class="date">{{ getDate() | date: "EEEE d MMMM y à H:mm:s" }}</p>
+    <h4>{{ post.title }}</h4>
+    <p class="date">{{ post.created_at | date: "EEEE d MMMM y à H:mm:s" }}</p>
   </div>
-  <p>{{ getStatus() }}</p>
-  <button class="btn btn-success btn-sm" (click)="setLove()">Love It</button>
-  <button class="btn btn-danger btn-sm" (click)="setDislike()">
-    Don't Love It
-  </button>
+  <p>{{ post.content }}</p>
+  <div class="row">
+    <button class="btn btn-success btn-sm mr-2" (click)="setLove()">Love It</button>
+    <button class="btn btn-danger btn-sm mr-2" (click)="setDislike()">Don't Love It</button>
+    <button class="btn btn-danger btn-sm ml-auto" (click)="removePost()">Supprimer</button>
+  </div>
 </li>

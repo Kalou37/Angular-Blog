@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Post } from "../post.model";
+import { PostsService } from "../posts.service";
 
 @Component({
   selector: "app-post-list-item",
@@ -6,39 +8,22 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./post-list-item.component.scss"]
 })
 export class PostListItemComponent implements OnInit {
-  @Input() postTitle: string;
-  @Input() postContent: string;
-  @Input() postLoveIts: number;
-  @Input() postDate: Date;
+  @Input() post: Post;
+  @Input() index: number;
 
-  constructor() {}
+  constructor(private postService: PostsService) {}
 
   ngOnInit() {}
 
-  getStatus() {
-    return this.postContent;
-  }
-
-  getDate() {
-    // Vérifie si une date est défini et la retourne, sinon en créé une aléatoirement
-    if (this.postDate) {
-      return this.postDate;
-    } else {
-      let year = Math.random() * 18 + 2000;
-      let month = Math.random() * 11;
-      let day = Math.random() * 28; // Pour éviter trop de code, je limite les jours à 28 (car février n'a que 28 jours)
-      let hour = Math.random() * 23;
-      let minute = Math.random() * 59;
-      let second = Math.random() * 59;
-      return (this.postDate = new Date(year, month, day, hour, minute, second));
-    }
-  }
-
   setLove() {
-    this.postLoveIts += 1;
+    this.postService.addLike(this.index);
   }
 
   setDislike() {
-    this.postLoveIts -= 1;
+    this.postService.unLike(this.index);
+  }
+
+  removePost(){
+    this.postService.removePost(this.post)
   }
 }

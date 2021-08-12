@@ -1,10 +1,4 @@
-<div style="text-align:center">
-  <h1>Bienvenue sur {{ title }} !</h1>
-</div>
+<app-header></app-header>
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <app-postList [posts]="posts"></app-postList>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>
